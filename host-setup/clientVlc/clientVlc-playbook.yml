@@ -11,6 +11,7 @@
     become: yes
 
   - name: Adjust arp table
+  #todo: trocar ip e mac abaixo
     command: ip neighbor add 192.168.50.50 lladdr 08:00:27:00:00:00 dev enp0s8 nud permanent
     become: yes
   
