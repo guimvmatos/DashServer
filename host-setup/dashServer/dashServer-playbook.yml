@@ -1,5 +1,5 @@
 ---
-  - hosts: all
+- hosts: all
   tasks:
   - name: Copy nginx configuration file
     command: cp /vagrant/host-setup/dashServer/nginx.conf /usr/local/nginx/conf/
