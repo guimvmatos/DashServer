@@ -3,8 +3,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "dashServer" do |ds|
         ds.vm.box = "ubuntu/xenial64"
         ds.vm.hostname = "dashServer"
-        #todo: definir ip, mac e bridge abaixo
-        ds.vm.network "public_network", ip: "fc00::10"'''definir''',mac: "00154d000000"'''definir''', bridge: "vf0_0"'''definir'''
+        ds.vm.network "public_network", ip: "fc00::8",mac: "00154d000004", bridge: "vf0_4"
         ds.vm.provider "virtualbox" do |virtualbox|
             v.memory = 2048
             v.cpus = 2
@@ -12,8 +11,6 @@ Vagrant.configure("2") do |config|
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
         ds.vm.provision "ansible" do |ansible| 
-            #todo: trocar ip e definir no arquivo: nginx.conf em 3 posições devidamente marcada com 'todo'
-            #todo: trocar ip e mac referente à vm client vlc no arquivo yml.
             ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
         end
     end
@@ -43,8 +40,7 @@ Vagrant.configure("2") do |config|
     # Node DASH SERVER configuration
         vlc.vm.box = "leandrocdealmeida/ubuntu-vlc"
         vlc.vm.hostname = "clientVlc"
-        #todo: definir ip, mac e bridge abaixo
-        vlc.vm.network "public_network", ip: "fc00::10"'''definir''',mac: "00154d000000"'''definir''', bridge: "vf0_0"'''definir'''
+        ds.vm.network "public_network", ip: "fc00::9",mac: "00154d000005", bridge: "vf0_5"
         vlc.vm.provider "virtualbox" do |virtualbox|
             v.memory = 2048
             v.cpus = 2
@@ -54,7 +50,6 @@ Vagrant.configure("2") do |config|
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
         vlc.vm.provision "ansible" do |ansible| 
-        #todo: trocar ip e mac referente à vm dash server no arquivo yml.
             ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
         end
     end

@@ -19,7 +19,7 @@
     become: yes
   
   - name: Adjust arp table for client VLC
-  #todo: trocar ip e mac
-    command: ip neighbor add 192.168.50.51 lladdr 08:00:27:00:00:01 dev enp0s8 nud permanent
+    #command: ip neighbor add 192.168.50.51 lladdr 08:00:27:00:00:01 dev enp0s8 nud permanent
+    command: ip -6 neigh add fc00::9 lladdr 00154d000005 nud permanent dev enp0s8
     become: yes
     
