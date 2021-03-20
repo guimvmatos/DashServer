@@ -5,8 +5,8 @@ Vagrant.configure("2") do |config|
         ds.vm.hostname = "dashServer"
         ds.vm.network "public_network", ip: "fc00::8",mac: "00154d000004", bridge: "vf0_4"
         ds.vm.provider "virtualbox" do |virtualbox|
-            v.memory = 2048
-            v.cpus = 2
+            virtualbox.memory = 2048
+            virtualbox.cpus = 2
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
@@ -42,10 +42,10 @@ Vagrant.configure("2") do |config|
         vlc.vm.hostname = "clientVlc"
         ds.vm.network "public_network", ip: "fc00::9",mac: "00154d000005", bridge: "vf0_5"
         vlc.vm.provider "virtualbox" do |virtualbox|
-            v.memory = 2048
-            v.cpus = 2
-            v.customize ["modifyvm", :id, "--vrde", "on"]
-            v.customize ["modifyvm", :id, "--vrdeport", "19101"]
+            virtualbox.memory = 2048
+            virtualbox.cpus = 2
+            virtualbox.customize ["modifyvm", :id, "--vrde", "on"]
+            virtualbox.customize ["modifyvm", :id, "--vrdeport", "19101"]
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
