@@ -2,7 +2,7 @@
 
 sudo apt-get update
 
-apt install scapy net-tools
+sudo apt-get -y install scapy net-tools
 
 sudo ip link set dev lo up
 sudo ip -6 addr add fc00::9/64 dev eth1

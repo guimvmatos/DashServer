@@ -2,7 +2,7 @@
 
 sudo apt-get update
 
-apt install scapy net-tools nmap build-essential git libpcre3-dev libssl-dev zlib1g-dev ffmpeg
+sudo apt-get -y install scapy net-tools nmap build-essential git libpcre3-dev libssl-dev zlib1g-dev ffmpeg
 
 sudo ip link set dev lo up
 sudo ip -6 addr add fc00::8/64 dev eth1
