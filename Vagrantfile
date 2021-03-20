@@ -53,6 +53,6 @@ Vagrant.configure("2") do |config|
         #vlc.vm.provision "ansible" do |ansible| 
         #    ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
         vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
-        end
+        #end
     end
 end
