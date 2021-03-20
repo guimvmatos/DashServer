@@ -50,8 +50,8 @@ Vagrant.configure("2") do |config|
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
-        vlc.vm.provision "ansible" do |ansible| 
-            ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
+        #vlc.vm.provision "ansible" do |ansible| 
+        #    ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
         vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
         end
     end
