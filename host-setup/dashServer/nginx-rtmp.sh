@@ -1,11 +1,11 @@
 
 cd /vagrant/host-setup/dashServer/
-git clone https://github.com/ut0mt8/nginx-rtmp-module/
-git clone https://github.com/nginx/nginx.git
+sudo git clone https://github.com/ut0mt8/nginx-rtmp-module/
+sudo git clone https://github.com/nginx/nginx.git
 cd nginx
-./auto/configure --add-module=../nginx-rtmp-module
-make
-make install
-wget https://isrv.pw/html5-live-streaming-with-mpeg-dash/nginx.service.txt -O /lib/systemd/system/nginx.service
-systemctl daemon-reload
-systemctl enable nginx.service
+sudo ./auto/configure --add-module=../nginx-rtmp-module
+sudo make
+sudo make install
+sudo wget https://isrv.pw/html5-live-streaming-with-mpeg-dash/nginx.service.txt -O /lib/systemd/system/nginx.service
+sudo systemctl daemon-reload
+sudo systemctl enable nginx.service

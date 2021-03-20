@@ -6,6 +6,6 @@
     become: yes
 
   - name: Restart nginx webserver
-    command: systemctl reload nginx
+    command: sudo systemctl reload nginx
     become: yes
     
