@@ -10,9 +10,9 @@ Vagrant.configure("2") do |config|
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
+        ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
         ds.vm.provision "ansible" do |ansible| 
             ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
-        ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
         end
     end
     ''' Teóricamente, não precisarei desta vm pois utilizarei a netronome. Manterei por segurança.
