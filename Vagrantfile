@@ -10,10 +10,10 @@ Vagrant.configure("2") do |config|
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
-        #ds.vm.provision "ansible" do |ansible| 
-        #    ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
-            ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
-        #end
+        ds.vm.provision "ansible" do |ansible| 
+            ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
+        ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
+        end
     end
     ''' Teóricamente, não precisarei desta vm pois utilizarei a netronome. Manterei por segurança.
     config.vm.define "bmv2" do |bmv2|
@@ -45,14 +45,11 @@ Vagrant.configure("2") do |config|
         vlc.vm.provider "virtualbox" do |virtualbox|
             virtualbox.memory = 2048
             virtualbox.cpus = 2
-        #    virtualbox.customize ["modifyvm", :id, "--vrde", "on"]
-        #    virtualbox.customize ["modifyvm", :id, "--vrdeport", "19101"]
+            virtualbox.customize ["modifyvm", :id, "--vrde", "on"]
+            virtualbox.customize ["modifyvm", :id, "--vrdeport", "19101"]
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
-        #vlc.vm.provision "ansible" do |ansible| 
-        #    ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
             vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
-        #end
     end
 end
