@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
     # Node DASH SERVER configuration
-    config.vm.define "ds" do |ds|
+    config.vm.define "dashServer" do |ds|
         ds.vm.box = "ubuntu/xenial64"
         ds.vm.hostname = "ds"
         ds.vm.network "public_network", ip: "fc00::8",mac: "00154d000004", bridge: "vf0_4"
@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     end
     '''
 
-    config.vm.define "vlc" do |vlc|
+    config.vm.define "clientVlc" do |vlc|
     # Node DASH SERVER configuration
         vlc.vm.box = "leandrocdealmeida/ubuntu-vlc"
         vlc.vm.hostname = "vlc"
