@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config|
     # Node DASH SERVER configuration
-    config.vm.define "dashServer" do |ds|
+    config.vm.define "ds" do |ds|
         ds.vm.box = "ubuntu/xenial64"
-        ds.vm.hostname = "dashServer"
+        ds.vm.hostname = "ds"
         ds.vm.network "public_network", ip: "fc00::8",mac: "00154d000004", bridge: "vf0_4"
         ds.vm.provider "virtualbox" do |virtualbox|
             virtualbox.memory = 2048
@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
         end
         ds.vm.provision "ansible" do |ansible| 
             ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
+        ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
         end
     end
     ''' Teóricamente, não precisarei desta vm pois utilizarei a netronome. Manterei por segurança.
@@ -36,10 +37,10 @@ Vagrant.configure("2") do |config|
     end
     '''
 
-    config.vm.define "clientVlc1" do |vlc|
+    config.vm.define "vlc" do |vlc|
     # Node DASH SERVER configuration
         vlc.vm.box = "leandrocdealmeida/ubuntu-vlc"
-        vlc.vm.hostname = "clientVlc"
+        vlc.vm.hostname = "vlc"
         vlc.vm.network "public_network", ip: "fc00::9",mac: "00154d000005", bridge: "vf0_5"
         vlc.vm.provider "virtualbox" do |virtualbox|
             virtualbox.memory = 2048
@@ -51,6 +52,7 @@ Vagrant.configure("2") do |config|
         end
         vlc.vm.provision "ansible" do |ansible| 
             ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
+        vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
         end
     end
 end
