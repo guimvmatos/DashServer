@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
     # Node DASH SERVER configuration
     config.vm.define "dashServer" do |ds|
-        ds.vm.box = "ubuntu/xenial64"
+        ds.vm.box = "srouting/srv6-net-prog"
         ds.vm.hostname = "ds"
         ds.vm.network "public_network", ip: "fc00::8",mac: "00154d000004", bridge: "vf0_4"
         ds.vm.provider "virtualbox" do |virtualbox|
@@ -10,10 +10,10 @@ Vagrant.configure("2") do |config|
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
-        ds.vm.provision "ansible" do |ansible| 
-            ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
-        ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
-        end
+        #ds.vm.provision "ansible" do |ansible| 
+        #    ansible.playbook = "host-setup/dashServer/dashServer-playbook.yml"
+            ds.vm.provision "shell", path: "host-setup/dashServer/config_dashServer.sh"
+        #end
     end
     ''' Teóricamente, não precisarei desta vm pois utilizarei a netronome. Manterei por segurança.
     config.vm.define "bmv2" do |bmv2|
@@ -45,14 +45,14 @@ Vagrant.configure("2") do |config|
         vlc.vm.provider "virtualbox" do |virtualbox|
             virtualbox.memory = 2048
             virtualbox.cpus = 2
-            virtualbox.customize ["modifyvm", :id, "--vrde", "on"]
-            virtualbox.customize ["modifyvm", :id, "--vrdeport", "19101"]
+        #    virtualbox.customize ["modifyvm", :id, "--vrde", "on"]
+        #    virtualbox.customize ["modifyvm", :id, "--vrdeport", "19101"]
             virtualbox.customize ['modifyvm', :id, '--cableconnected1', 'on']
 			virtualbox.customize ['modifyvm', :id, '--cableconnected2', 'on']
         end
         #vlc.vm.provision "ansible" do |ansible| 
         #    ansible.playbook = "host-setup/clientVlc/clientVlc-playbook.yml"
-        vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
+            vlc.vm.provision "shell", path: "host-setup/clientVlc/config_clientVlc.sh"
         #end
     end
 end
